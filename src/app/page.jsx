@@ -1,27 +1,45 @@
-import BlogCard from '@/components/blogCard/BlogCard'
-import { blogs } from '@/lib/data'
-import Image from 'next/image'
-import classes from './page.module.css'
-
-export async function fetchBlogs(){
-  const res = await fetch('https://blog-nextjs-13-sud5.vercel.app/api/blog', {cache: 'no-store'})
-
-  return res.json()
-}
-
-
+"use client";
+import React, { useEffect } from "react"
+import './globals.css'
+import { gsap } from 'gsap/dist/gsap'
+import BlogCard from "@/components/blogCard/BlogCard";
+import Navbar from "@/components/navbar/Navbar";
+// async function fetchBlogs() {
+//   const res = await fetch('http://localhost:3000/api/customers/blog/get', { cache: 'no-store' })
+//   // console.log(res);
+//   return res.json();
+// }
 export default async function Home() {
-  const blogs = await fetchBlogs()
+  // const data = await fetchBlogs()
+  // const blogs = data.blogs;
+
+  // useEffect(() => {
+  //   gsap.from(".loader h1", 2, {
+  //     opacity: 0,
+  //     x: 800
+  //   }, 'start')
+  //   gsap.from(".loader h2", 2, {
+  //     opacity: 0,
+  //     x: -800
+  //   }, 'start')
+  // }, [])
+
+
 
   return (
-   <div className={classes.container}>
-    {blogs?.length > 0 && <h2>WebDevMania&apos;s Blog Website</h2>}
-     <div className={classes.wrapper}>
-      {blogs?.length > 0 
-       ? blogs.map((blog) => (
-        <BlogCard key={blog._id} blog={blog}/>
-      )) : <h3 className={classes.noBlogs}>No blogs are currently in the</h3>}
-     </div>
-   </div>
+    <>
+      <Navbar />
+      <div className="main" id="scrollbar1">
+        {/* <!-- LOADER --> */}
+        <div className="loader">
+          <h1>BLOGS</h1>
+          <h2>PAGE</h2>
+        </div>
+        {/* <h1 className="heading">Technology</h1> */}
+        <div className="container">
+        
+        </div>
+      </div>
+    </>
   )
 }

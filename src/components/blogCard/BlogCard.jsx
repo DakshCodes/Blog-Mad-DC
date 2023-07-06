@@ -1,63 +1,29 @@
 'use client'
 
-import Image from 'next/image'
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import classes from './blogCard.module.css'
-import { useSession } from 'next-auth/react'
-import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
-
-const BlogCard = ({ blog: { title, desc, imageUrl, likes, authorId, _id } }) => {
-  const { data: session } = useSession()
-  const [isLiked, setIsLiked] = useState(false)
-  const [blogLikes, setBlogLikes] = useState(0)
+import './card.css';
 
 
-  useEffect(() => {
-    session && likes && setIsLiked(likes.includes(session?.user?._id))
-    session && likes && setBlogLikes(likes.length)
-  }, [likes, session])
-
-  const handleLike = async () => {
-    try {
-      const res = await fetch(`https://blog-nextjs-13-sud5.vercel.app/api/blog/${_id}/like`, {
-        headers: {
-          'Authorization': `Bearer ${session?.user?.accessToken}`
-        },
-        method: 'PUT'
-      })
-
-      console.log(res)
-      if (res.ok) {
-        if (isLiked) {
-          setIsLiked(prev => !prev)
-          setBlogLikes(prev => prev - 1)
-        } else {
-          setIsLiked(prev => !prev)
-          setBlogLikes(prev => prev + 1)
-        }
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
+const BlogCard = ({ blog, id }) => {
   return (
-    <div className={classes.container}>
-      <div className={classes.wrapper}>
-        <Link className={classes.imgContainer} href={`/blog/${_id}`}>
-          <Image src={imageUrl} width="350" height="350" />
-        </Link>
-        <div className={classes.blogData}>
-          <div className={classes.left}>
-            <h3>{title}</h3>
-            <p>{desc}</p>
-            <span>Created By: <span>1th of January</span></span>
-          </div>
-          <div className={classes.right}>
-            {blogLikes} {" "} {isLiked
-              ? (<AiFillLike onClick={handleLike} size={20} />)
-              : (<AiOutlineLike onClick={handleLike} size={20} />)}
+    <div className="card">
+      <div className="card-header">
+        <img src="https://www.newsbtc.com/wp-content/uploads/2020/06/mesut-kaya-LcCdl__-kO0-unsplash-scaled.jpg" alt="rover" />
+      </div>
+      <div className="card-body">
+        <span className="tag tag-teal">Technology</span>
+        <h4>
+          Why is the Tesla Cybertruck designed the way it
+          is?
+        </h4>
+        <p>
+          An exploration into the truck's polarising design
+        </p>
+        <div className="user">
+          <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo" alt="user" />
+          <div className="user-info">
+            <h5>July Dec</h5>
+            <small>2h ago</small>
           </div>
         </div>
       </div>
