@@ -2,14 +2,22 @@
 
 import React, { useEffect, useState } from 'react'
 import './card.css';
+import pic from '../../app/auth/man.jpg'
+import Image from 'next/image';
+import Link from 'next/link';
 
 
 const BlogCard = ({ blog, id }) => {
   return (
     <div className="card">
-      <div className="card-header">
-        <img src="https://www.newsbtc.com/wp-content/uploads/2020/06/mesut-kaya-LcCdl__-kO0-unsplash-scaled.jpg" alt="rover" />
-      </div>
+      <Link href={'/blog/:id'}>
+        <div className="card-header">
+          <Image src={pic}
+            width={500}
+            height={500}
+            alt="Picture of the author" />
+        </div>
+      </Link>
       <div className="card-body">
         <span className="tag tag-teal">Technology</span>
         <h4>

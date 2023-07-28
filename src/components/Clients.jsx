@@ -9,18 +9,18 @@ export const Context = createContext({ user: {} });
 export const ContextProvider = ({ children }) => {
     const router = useRouter()
     const [user, setUser] = useState({});
-    // useEffect(() => {
-    //     if (!user) {
-    //       router.push('/login');
-    //     }
-    //     else {
-    //         const setuser = async () => {
-    //             // console.log(await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)));
-    //             setUser(await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)));
-    //         }
-    //         setuser();
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (!user) {
+          router.push('/auth');
+        }
+        else {
+            const setuser = async () => {
+                // console.log(await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)));
+                setUser(await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)));
+            }
+            setuser();
+        }
+    }, []);
 
     return (
         <Context.Provider

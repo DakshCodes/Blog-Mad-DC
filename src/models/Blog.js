@@ -18,13 +18,6 @@ const BlogSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: [
-            'Nature',
-            'Mountain',
-            'Ocean',
-            'Wildlife',
-            'Forest',
-        ]
     },
     authorId: {
         type: mongoose.Schema.Types.ObjectId,
